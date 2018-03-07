@@ -1,7 +1,6 @@
 import { LicenseApplicationStatus } from './licenseApplicationStatus';
 
 export class LicenseApplication {
-    id: string;
     firstName: string = null;
     lastName: string = null;
     dateOfBirth: Date = null;
@@ -10,8 +9,11 @@ export class LicenseApplication {
     email: string = null;
     address: string = null;
     status: string = null;
-    created: Date = null;
+    created: string = null;
     lastModified: Date = null;
+    reviewed: boolean = false;
+    approved: boolean = false;
+    rejected: boolean = false;
 
     toDto() {
         let date = new Date();
@@ -24,8 +26,11 @@ export class LicenseApplication {
             address: this.address,
             email: this.email,
             status: LicenseApplicationStatus.submitted,
-            created: date,
-            lastModified: date
+            created: date.toLocaleDateString(),
+            lastModified: date.toLocaleDateString(),
+            reviewed: this.reviewed,
+            approved: this.approved,
+            rejected: this.rejected
         }
     }
 

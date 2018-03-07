@@ -9,11 +9,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let application of submittedApplications | async">
+            <!-- <tr *ngFor="let application of licenseApplicationRef | async"> -->
                 <td>
-                    <a data-toggle="modal" data-target="#myModal"
-                     (click)="setSelectedApplication(application)">{{application.firstName}} {{application.lastName}}</a>
+                    <a data-toggle="modal" data-target="#myModal" (click)="setSelectedApplication(application)">{{application.firstName}} {{application.lastName}}</a>
                 </td>
-                <td>{{application.created | date: 'dd/MM/yyyy'}}</td>
+                <td>{{application.created | date: 'MM-dd-yyyy'}}</td>
                 <td>{{application.occupation}}</td>
             </tr>
         </tbody>
@@ -27,15 +27,22 @@
             <div class="modal-content" *ngIf="selectedApplication">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Application for <b> {{selectedApplication.firstName}} {{selectedApplication.lastName}}</b></h4>
+                    <h4 class="modal-title">Application for
+                        <b> {{selectedApplication.firstName}} {{selectedApplication.lastName}}</b>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                        <p><b>Applicant Name: </b> {{selectedApplication.firstName}} {{selectedApplication.lastName}}</p>
-                        <p><b>Residential Address: </b> {{selectedApplication.address}}</p>
-                        <p><b>Applicant Birth Date: </b> {{selectedApplication.dateOfBirth | date: 'dd/MM/yyyy'}}</p>
-                        <p><b>State of Origin:</b> {{selectedApplication.stateOfOrigin}}</p>
-                        <p><b>Occupation: </b> {{selectedApplication.occupation}}</p>
+                        <p>
+                            <b>Applicant Name: </b> {{selectedApplication.firstName}} {{selectedApplication.lastName}}</p>
+                        <p>
+                            <b>Residential Address: </b> {{selectedApplication.address}}</p>
+                        <p>
+                            <b>Applicant Birth Date: </b> {{selectedApplication.dateOfBirth | date: 'dd/MM/yyyy'}}</p>
+                        <p>
+                            <b>State of Origin:</b> {{selectedApplication.stateOfOrigin}}</p>
+                        <p>
+                            <b>Occupation: </b> {{selectedApplication.occupation}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
