@@ -1,3 +1,4 @@
 export class DatabaseNodes {
-    static licenseApplications = '/licenseApplications'
+    static readonly LICENSE_APPLICATIONS = '/licenseApplications';
+    static readonly USERS = '/users';
 }

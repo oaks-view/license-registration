@@ -13,6 +13,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
+import { SigninComponent } from '../app/accounts/signin/signin.component';
+import { SignupComponent } from '../app/accounts/signup/signup.component';
+import { AuthService } from './shared/services/auth.service';
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { AppComponent } from './app.component';
     AppComponent,
     WelcomeComponent,
     LicenseRegistrationComponent,
-    SubmittedApplicationsComponent
+    SubmittedApplicationsComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +39,15 @@ import { AppComponent } from './app.component';
         path: 'license-registration', component: LicenseRegistrationComponent
       },
       { path: 'welcome', component: WelcomeComponent },
-      { path: 'submitted-applications', component: SubmittedApplicationsComponent }
+      { path: 'submitted-applications', component: SubmittedApplicationsComponent },
+      { path: 'signin', component: SigninComponent },
+      { path: 'signup', component: SignupComponent }
     ]),
     Ng4LoadingSpinnerModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

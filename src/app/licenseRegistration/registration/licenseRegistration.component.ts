@@ -61,6 +61,6 @@ export class LicenseRegistrationComponent implements OnInit {
 
     ngOnInit(): void {
         this.newApplication = new LicenseApplication();
-        this._licenseApplicationsRef = this._db.list(DatabaseNodes.licenseApplications);
+        this._licenseApplicationsRef = this._db.list(DatabaseNodes.LICENSE_APPLICATIONS);
     }
 }

@@ -1,0 +1,21 @@
+<div class="container">
+
+    <form  #frm="ngForm" novalidate class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input [(ngModel)]="email" type="email" name="signinEmail" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input [(ngModel)]="password" type="password" name="signinPassword" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button (click)="signinByEmailAndPassword($event)" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <p class="small-padding">
+            Dont have an Account?<a [routerLink]="['/signup']">&nbsp;Sign up</a>
+        </p>
+    </form>
+
+</div>

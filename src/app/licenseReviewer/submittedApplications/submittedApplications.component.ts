@@ -30,7 +30,7 @@ export class SubmittedApplicationsComponent implements OnInit{
       }
 
     ngOnInit(): void {
-        this.licenseApplicationRef = this._db.list(DatabaseNodes.licenseApplications);
+        this.licenseApplicationRef = this._db.list(DatabaseNodes.LICENSE_APPLICATIONS);
         this.submittedApplications = this.licenseApplicationRef.valueChanges();
         console.log(this.submittedApplications);
     }

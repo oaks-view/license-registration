@@ -1,0 +1,24 @@
+<div class="container">
+
+    <form #frm="ngForm" novalidate class="form-signin">
+        <h2 class="form-signin-heading">Please Signup</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input [(ngModel)]="email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input [(ngModel)]="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+       
+        <button (click)="signupWithEemailAndPassword($event)" class="btn btn-lg btn-primary btn-block small-margin" type="submit">Sign up</button>
+
+        <p class="small-padding">
+            Already have an Account?
+            <a [routerLink]="['/signin']">&nbsp;Sign in</a>
+        </p>
+
+        <h4 class="small-padding">OR</h4>
+
+        <p class="small-padding">
+            <a (click)="signinWithGoogle()">&nbsp;Sign in with google</a>
+        </p>
+    </form>
+
+</div>
