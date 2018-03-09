@@ -28,10 +28,6 @@ export class LicenseRegistrationComponent implements OnInit {
         private _authService: AuthService,
         private _router: Router,
         private _db: AngularFireDatabase, ) {
-        // this._licenseApplicationsRef = _db.object('licenseRegistration');
-        // this.licenseApplication = this._licenseApplicationsRef.valueChanges();
-
-        // this.newApplication = new LicenseApplication();
     }
 
     @ViewChild('frm') form;
@@ -52,7 +48,7 @@ export class LicenseRegistrationComponent implements OnInit {
 
             ref.set(<any>this.newApplication.toDto()).then((reference) => {
                 this.spinnerService.hide();
-                this._router.navigateByUrl('/welcome'); // todo change to a feedbac screen
+                this._router.navigateByUrl('/home'); // todo change to a feedbac screen
             }).catch((error) => {
                 this.spinnerService.hide();
                 console.error(error.message);
@@ -63,31 +59,10 @@ export class LicenseRegistrationComponent implements OnInit {
             console.error(error.message);
             this.spinnerService.hide();
         }
-
-        // try {
-        //     this._licenseApplicationsRef.push(<any>this.newApplication.toDto()).then(() => {
-        //         this.spinnerService.hide();
-        //     });
-        // }
-
-        // catch (error) {
-        //     this.spinnerService.hide();
-        //     console.log(error);
-        // }
-
-        // this._licenseApplicationsRef.set(this.newApplication).then(() => {
-        //     alert('succeefully saved data');
-        //     this.spinnerService.hide();
-        // }).catch(error => {
-        //     this.spinnerService.hide();
-        //     console.log('ERROR ERROR ERROR');
-        //     console.log(error);
-        // });
     }
 
     ngOnInit(): void {
         this.newApplication = new LicenseApplication();
         this._licenseApplicationsRef = this._db.list(DatabaseNodes.LICENSE_APPLICATIONS);
-
     }
 }

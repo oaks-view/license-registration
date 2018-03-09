@@ -15,6 +15,7 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { SigninComponent } from '../app/accounts/signin/signin.component';
 import { SignupComponent } from '../app/accounts/signup/signup.component';
+import { HomeComponent } from '../app/home/home.component';
 import { AuthService } from './shared/services/auth.service';
 import { ReviewerGuard } from './shared/services/reviewerGuard';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
@@ -27,7 +28,8 @@ import {ToasterModule, ToasterService} from 'angular2-toaster';
     LicenseRegistrationComponent,
     SubmittedApplicationsComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import {ToasterModule, ToasterService} from 'angular2-toaster';
       { path: 'submitted-applications', component: SubmittedApplicationsComponent },
       { path: 'signin', component: SigninComponent },
       { path: 'signup', component: SignupComponent },
+      { path: 'home', component: HomeComponent },
       { path: '', redirectTo: '/welcome', pathMatch: 'full'},
       { path: '**', redirectTo: '/welcome' }
     ]),

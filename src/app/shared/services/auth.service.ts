@@ -19,6 +19,8 @@ export class AuthService {
     loggedInUserId: string;
     loggedInUserRoles: Roles;
 
+    isReviewer: Observable<boolean>;
+
     constructor(
         private firebaseAuth: AngularFireAuth,
         private _spinnerService: Ng4LoadingSpinnerService,
@@ -55,7 +57,7 @@ export class AuthService {
                 } 
 
                 this._spinnerService.hide();
-                this._router.navigateByUrl('/welcome');
+                this._router.navigateByUrl('/home');
             })
             .catch((error) => {
                 this._spinnerService.hide();
@@ -98,7 +100,7 @@ export class AuthService {
 
         ref.set(newUser).then((reference) => {
             this._spinnerService.hide();
-            this._router.navigateByUrl('/welcome');
+            this._router.navigateByUrl('/home');
         }).catch((error) => {
             this._spinnerService.hide();
             console.error(error.message);
@@ -111,8 +113,8 @@ export class AuthService {
 
         this.applicationUser = ref.valueChanges();
 
-        this.applicationUser.subscribe(user => {
-            this.loggedInUserRoles = user.roles;
-        })
+        this.isReviewer = this.applicationUser.map( user => {
+            return user.roles.reviewer || false;
+        } );
     }
 }
