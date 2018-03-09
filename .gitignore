@@ -9,6 +9,9 @@
 # dependencies
 /node_modules
 
+#firebase ignore
+/functions/node_modules
+
 # IDEs and editors
 /.idea
 .project
