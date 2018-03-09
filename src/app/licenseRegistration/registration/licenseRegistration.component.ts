@@ -42,8 +42,6 @@ export class LicenseRegistrationComponent implements OnInit {
     submitApplication() {
         this.spinnerService.show();
 
-        alert(this._authService.loggedInUserId);
-
         try {
             let userId = this._authService.loggedInUserId;
 
@@ -62,7 +60,8 @@ export class LicenseRegistrationComponent implements OnInit {
         }
 
         catch(error) {
-            //
+            console.error(error.message);
+            this.spinnerService.hide();
         }
 
         // try {

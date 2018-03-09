@@ -14,6 +14,7 @@ import { User, Roles } from '../../shared/models/user.model';
 })
 export class SubmittedApplicationsComponent implements OnInit{
     licenseApplicationRef: AngularFireList<LicenseApplication>;
+    allApplications: Observable<LicenseApplication[]>;
     submittedApplications: Observable<LicenseApplication[]>;
     selectedApplication: LicenseApplication;
 
@@ -42,7 +43,12 @@ export class SubmittedApplicationsComponent implements OnInit{
 
     ngOnInit(): void {
         this.licenseApplicationRef = this._db.list(DatabaseNodes.LICENSE_APPLICATIONS);
-        this.submittedApplications = this.licenseApplicationRef.valueChanges();
+        this.allApplications = this.licenseApplicationRef.valueChanges();
+
+        this.submittedApplications = this.allApplications.map( applications => {
+            return applications.filter( x => !x.reviewed);
+        } )
+            
         console.log(this.submittedApplications);
     }
 }
