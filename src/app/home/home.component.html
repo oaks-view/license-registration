@@ -3,6 +3,11 @@
         <h4>
             <b>hi, {{(auth.user | async).email}}</b>
         </h4>
-        <div></div>
+        <div *ngIf="auth.applicationSent" class="flex-container">
+            <div class="alert alert-success" role="alert" id="successMsg">
+                <strong>Application Processing!</strong> You sucessfully applied for your license
+                You will be notified once it is approved
+            </div>
+        </div>
     </div>
 </div>

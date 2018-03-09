@@ -18,6 +18,7 @@ export class AuthService {
     applicationUser: Observable<User>
     loggedInUserId: string;
     loggedInUserRoles: Roles;
+    applicationSent = false;
 
     isReviewer: Observable<boolean>;
 

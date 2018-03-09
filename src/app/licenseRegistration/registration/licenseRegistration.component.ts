@@ -48,6 +48,7 @@ export class LicenseRegistrationComponent implements OnInit {
 
             ref.set(<any>this.newApplication.toDto()).then((reference) => {
                 this.spinnerService.hide();
+                this._authService.applicationSent = true;
                 this._router.navigateByUrl('/home'); // todo change to a feedbac screen
             }).catch((error) => {
                 this.spinnerService.hide();
