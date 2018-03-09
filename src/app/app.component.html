@@ -17,18 +17,12 @@
       <ul class="nav navbar-nav">
           <ng-template [ngIf]="(authService.user | async)">
               <li>
-                  <a [routerLink]="['license-registration']">Apply</a>
+                  <a [routerLink]="['license-registration']" routerLinkActive="active-link">Apply</a>
                 </li>
                 <li>
-                  <a [routerLink]="['submitted-applications']">Submitted Applications</a>
+                  <a [routerLink]="['submitted-applications']" routerLinkActive="active-link">Submitted Applications</a>
                 </li>
           </ng-template>
-        <!-- <li>
-          <a [routerLink]="['license-registration']">Apply</a>
-        </li>
-        <li>
-          <a [routerLink]="['submitted-applications']">Submitted Applications</a>
-        </li> -->
       </ul>
 
       <!-- right hand side -->

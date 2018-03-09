@@ -41,7 +41,9 @@ import { AuthService } from './shared/services/auth.service';
       { path: 'welcome', component: WelcomeComponent },
       { path: 'submitted-applications', component: SubmittedApplicationsComponent },
       { path: 'signin', component: SigninComponent },
-      { path: 'signup', component: SignupComponent }
+      { path: 'signup', component: SignupComponent },
+      { path: '', redirectTo: '/welcome', pathMatch: 'full'},
+      { path: '**', redirectTo: '/welcome' }
     ]),
     Ng4LoadingSpinnerModule.forRoot()
   ],

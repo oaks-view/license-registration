@@ -9,3 +9,7 @@
 a {
     cursor: pointer;
 }
+
+.active-link {
+    color: #337ab7 !important;
+}
