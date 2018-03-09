@@ -6,6 +6,7 @@ import { LicenseApplication } from '../../shared/models/licenseApplication.model
 import { LicenseApplicationStatus } from '../../shared/models/licenseApplicationStatus';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatabaseNodes } from '../../shared/models/databaseNodes.model';
+import { User, Roles } from '../../shared/models/user.model';
 
 @Component({
     selector: 'app-submitted-application',
@@ -27,6 +28,16 @@ export class SubmittedApplicationsComponent implements OnInit{
     }
 
     updateSelectedApplicationStatus() {
+        let ref = this._db.object('licenseApplications/' + this.selectedApplication.id);
+
+        this.spinnerService.show();
+
+        ref.update({reviewed: true }).then(() => {
+            this.spinnerService.hide();
+        }).catch((error) => {
+            this.spinnerService.hide();
+            console.error(error.message);
+        })
       }
 
     ngOnInit(): void {

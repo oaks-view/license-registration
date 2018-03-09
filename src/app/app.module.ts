@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from '../app/accounts/signin/signin.component';
 import { SignupComponent } from '../app/accounts/signup/signup.component';
 import { AuthService } from './shared/services/auth.service';
+import { ReviewerGuard } from './shared/services/reviewerGuard';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AuthService } from './shared/services/auth.service';
     Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [
-    AuthService
+    AuthService,
+    ReviewerGuard
   ],
   bootstrap: [AppComponent]
 })

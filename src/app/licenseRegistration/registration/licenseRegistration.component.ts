@@ -6,6 +6,8 @@ import { LicenseApplication } from '../../shared/models/licenseApplication.model
 import { LicenseApplicationStatus } from '../../shared/models/licenseApplicationStatus';
 import { DatabaseNodes } from '../../shared/models/databaseNodes.model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-license-registration',
@@ -23,7 +25,9 @@ export class LicenseRegistrationComponent implements OnInit {
 
     constructor(
         private spinnerService: Ng4LoadingSpinnerService,
-        private _db: AngularFireDatabase) {
+        private _authService: AuthService,
+        private _router: Router,
+        private _db: AngularFireDatabase, ) {
         // this._licenseApplicationsRef = _db.object('licenseRegistration');
         // this.licenseApplication = this._licenseApplicationsRef.valueChanges();
 
@@ -38,16 +42,39 @@ export class LicenseRegistrationComponent implements OnInit {
     submitApplication() {
         this.spinnerService.show();
 
+        alert(this._authService.loggedInUserId);
+
         try {
-            this._licenseApplicationsRef.push(<any>this.newApplication.toDto()).then(() => {
+            let userId = this._authService.loggedInUserId;
+
+            const ref = this._db.object<LicenseApplication>('licenseApplications/' + userId);
+
+            this.newApplication.id = userId;
+
+
+            ref.set(<any>this.newApplication.toDto()).then((reference) => {
                 this.spinnerService.hide();
-            });
+                this._router.navigateByUrl('/welcome'); // todo change to a feedbac screen
+            }).catch((error) => {
+                this.spinnerService.hide();
+                console.error(error.message);
+            })
         }
 
         catch(error) {
-            this.spinnerService.hide();
-            console.log(error);
+            //
         }
+
+        // try {
+        //     this._licenseApplicationsRef.push(<any>this.newApplication.toDto()).then(() => {
+        //         this.spinnerService.hide();
+        //     });
+        // }
+
+        // catch (error) {
+        //     this.spinnerService.hide();
+        //     console.log(error);
+        // }
 
         // this._licenseApplicationsRef.set(this.newApplication).then(() => {
         //     alert('succeefully saved data');
@@ -62,5 +89,6 @@ export class LicenseRegistrationComponent implements OnInit {
     ngOnInit(): void {
         this.newApplication = new LicenseApplication();
         this._licenseApplicationsRef = this._db.list(DatabaseNodes.LICENSE_APPLICATIONS);
+
     }
 }

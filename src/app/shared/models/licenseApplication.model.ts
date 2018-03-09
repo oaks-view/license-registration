@@ -1,6 +1,7 @@
 import { LicenseApplicationStatus } from './licenseApplicationStatus';
 
 export class LicenseApplication {
+    id: string = null;
     firstName: string = null;
     lastName: string = null;
     dateOfBirth: Date = null;
@@ -18,6 +19,7 @@ export class LicenseApplication {
     toDto() {
         let date = new Date();
         return {
+            id: this.id,
             firstName: this.firstName,
             lastName: this.lastName,
             dateOfBirth: this.dateOfBirth,

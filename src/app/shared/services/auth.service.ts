@@ -16,6 +16,8 @@ import { DatabaseNodes } from '../models/databaseNodes.model';
 export class AuthService {
     user: Observable<firebase.User>;
     applicationUser: Observable<User>
+    loggedInUserId: string;
+    loggedInUserRoles: Roles;
 
     constructor(
         private firebaseAuth: AngularFireAuth,
@@ -90,6 +92,8 @@ export class AuthService {
         const newUser = new User(authData);
         const ref = this._db.object<User>('users/' + authData.uid);
 
+        this.loggedInUserId = authData.uid;
+
         this.applicationUser = ref.valueChanges();
 
         ref.set(newUser).then((reference) => {
@@ -103,7 +107,12 @@ export class AuthService {
 
     private setAppUser(authData) {
         const ref = this._db.object<User>('users/' + authData.uid);
+        this.loggedInUserId = authData.uid;
 
         this.applicationUser = ref.valueChanges();
+
+        this.applicationUser.subscribe(user => {
+            this.loggedInUserRoles = user.roles;
+        })
     }
 }
