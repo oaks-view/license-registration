@@ -7,6 +7,7 @@ import { LicenseApplicationStatus } from '../../shared/models/licenseApplication
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatabaseNodes } from '../../shared/models/databaseNodes.model';
 import { User, Roles } from '../../shared/models/user.model';
+import { ToasterService} from 'angular2-toaster';
 
 @Component({
     selector: 'app-submitted-application',
@@ -20,7 +21,8 @@ export class SubmittedApplicationsComponent implements OnInit{
 
     constructor(
         private spinnerService: Ng4LoadingSpinnerService,
-        private _db: AngularFireDatabase
+        private _db: AngularFireDatabase,
+        private _toaster: ToasterService
     ) {}
 
     setSelectedApplication(application) {
@@ -28,15 +30,32 @@ export class SubmittedApplicationsComponent implements OnInit{
         console.log(`selected application key ${application.$key}`);
     }
 
-    updateSelectedApplicationStatus() {
+    approveSelectedApplication() {
         let ref = this._db.object('licenseApplications/' + this.selectedApplication.id);
 
         this.spinnerService.show();
 
         ref.update({reviewed: true }).then(() => {
             this.spinnerService.hide();
+            this._toaster.pop('success', 'Succesful', 'Application successfully reviewd!')
         }).catch((error) => {
             this.spinnerService.hide();
+            this._toaster.pop('error', 'An Error occured', error.message);
+            console.error(error.message);
+        })
+      }
+
+      rejectSelectedApplication() {
+        let ref = this._db.object('licenseApplications/' + this.selectedApplication.id);
+
+        this.spinnerService.show();
+
+        ref.update({rejected: true }).then(() => {
+            this.spinnerService.hide();
+            this._toaster.pop('info', 'Successful', 'Application successfully rejected!');
+        }).catch((error) => {
+            this.spinnerService.hide();
+            this._toaster.pop('error', 'An error occured', error.message);
             console.error(error.message);
         })
       }
@@ -46,7 +65,7 @@ export class SubmittedApplicationsComponent implements OnInit{
         this.allApplications = this.licenseApplicationRef.valueChanges();
 
         this.submittedApplications = this.allApplications.map( applications => {
-            return applications.filter( x => !x.reviewed);
+            return applications.filter( x => !x.reviewed && !x.rejected);
         } )
             
         console.log(this.submittedApplications);

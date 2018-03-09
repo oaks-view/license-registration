@@ -17,6 +17,7 @@ import { SigninComponent } from '../app/accounts/signin/signin.component';
 import { SignupComponent } from '../app/accounts/signup/signup.component';
 import { AuthService } from './shared/services/auth.service';
 import { ReviewerGuard } from './shared/services/reviewerGuard';
+import {ToasterModule, ToasterService} from 'angular2-toaster';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ReviewerGuard } from './shared/services/reviewerGuard';
     // AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
+    ToasterModule.forRoot(),
     RouterModule.forRoot([
       {
         path: 'license-registration', component: LicenseRegistrationComponent
